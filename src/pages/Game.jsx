@@ -8,6 +8,7 @@ class Game extends React.Component {
     currentScore: 0,
     player0: { id: 0, score: 0, isActive: false },
     player1: { id: 1, score: 0, isActive: true },
+    pointsToWin: 100,
   };
 
   switchTurns = () => {

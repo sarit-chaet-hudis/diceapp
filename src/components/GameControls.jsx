@@ -3,9 +3,11 @@ import Die from "./Die";
 
 class GameControls extends React.Component {
   roll = () => {
-    const result = Math.ceil(Math.random() * 11) + 1;
-    console.log(`result of throw dice is ${result}`);
-    this.props.addDiceResult(result);
+    const die1 = Math.ceil(Math.random() * 6);
+    const die2 = Math.ceil(Math.random() * 6);
+    console.log(`die 1 is ${die1}, die 2 is ${die2}`);
+
+    this.props.addDiceResult(die1 + die2);
   };
 
   render() {
