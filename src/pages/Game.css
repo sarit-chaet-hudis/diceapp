@@ -1,0 +1,12 @@
+.playerContainer,
+.gameControls {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid #ccc;
+}
+
+.gameControls {
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}

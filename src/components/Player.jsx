@@ -1,8 +1,18 @@
 import React from "react";
 
 class Player extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <p>Im Player</p>;
+    // const { id, myScore } = this.props;
+    return (
+      <div>
+        <p>Im Player {this.props.id}</p>
+        <p>My Score is {this.props.score}</p>
+      </div>
+    );
   }
 }
 
