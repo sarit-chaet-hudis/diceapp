@@ -32,10 +32,8 @@ class Game extends React.Component {
   hold = () => {
     // add current score to total player score, then reset current score
     const active = this.getActivePlayer();
-    console.log(`active player is ${active.id}`);
     const activePlayerCopy = Object.assign({}, active);
     activePlayerCopy.score += this.state.currentScore;
-    console.log(`new score of active copy is ${activePlayerCopy.score}`);
 
     this.setState({ [`player${active.id}`]: activePlayerCopy });
     this.setState({ currentScore: 0 });
