@@ -101,6 +101,11 @@ class Game extends React.Component {
     });
   }
 
+  changePointsToWin(e) {
+    console.log(e.target.value);
+    this.setState({ pointsToWin: e.target.value });
+  }
+
   render() {
     return (
       <div>
@@ -108,6 +113,16 @@ class Game extends React.Component {
         <button id="newGame" onClick={() => this.newGame()}>
           New Game
         </button>
+        <label htmlFor="pointsToWin" id="pointsLabel">
+          Points to Win:
+        </label>
+        <input
+          type="text"
+          id="pointsToWin"
+          placeholder="?"
+          value={this.state.pointsToWin}
+          onChange={(e) => this.changePointsToWin(e)}
+        ></input>
         <div className="playerWrapper">
           <div className="playerContainer">
             <Player
