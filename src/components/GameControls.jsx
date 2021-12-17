@@ -3,10 +3,13 @@ import Die from "./Die";
 import "./GameControls.css";
 import { GiRollingDices } from "react-icons/gi";
 import { MdFrontHand } from "react-icons/md";
+import sound from "./../assets/sounds/dice-sound.mp3";
 
 class GameControls extends React.Component {
   state = { die1Value: this.props.dice[0], die2Value: this.props.dice[1] };
+  diceSound = new Audio(sound);
   roll = () => {
+    this.diceSound.play();
     const die1 = Math.ceil(Math.random() * 6);
     const die2 = Math.ceil(Math.random() * 6);
     this.showDice({ die1, die2 });

@@ -3,6 +3,7 @@ import "./Game.css";
 import GameControls from "../components/GameControls";
 import Player from "../components/Player";
 import { GiBatMask, GiAlienStare } from "react-icons/gi";
+import sound from "./../assets/sounds/aww.wav";
 
 class Game extends React.Component {
   state = {
@@ -13,6 +14,7 @@ class Game extends React.Component {
     userMessage: "Ready to Roll?",
   };
 
+  awwSound = new Audio(sound);
   switchTurns = () => {
     //TODO find out if this syntax is doing what i thought and why no : is involved
     this.setState((prev) => (prev.player0.isActive = !prev.player0.isActive));
@@ -32,8 +34,10 @@ class Game extends React.Component {
         return { currentScore: prev.currentScore + die1 + die2 };
       });
     } else {
+      this.awwSound.play();
       this.setState({ currentScore: 0, userMessage: "AWWWWW" });
       setTimeout(() => this.switchTurns(), 1000);
+      // TODO reset dice display!
     }
   };
 
