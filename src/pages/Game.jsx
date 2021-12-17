@@ -43,7 +43,7 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <p>This is Game!!</p>
+        <h1>Welcome to Dice Game!</h1>
 
         <div className="playerContainer">
           <Player

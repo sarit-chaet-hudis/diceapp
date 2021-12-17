@@ -6,6 +6,7 @@ import dice3 from "./../assets/images/3.png";
 import dice4 from "./../assets/images/4.png";
 import dice5 from "./../assets/images/5.png";
 import dice6 from "./../assets/images/6.png";
+import dice0 from "./../assets/images/0.png";
 
 class Die extends React.Component {
   showDice(dieValue) {
@@ -23,7 +24,7 @@ class Die extends React.Component {
       case 6:
         return dice6;
       default:
-        return undefined;
+        return dice0;
     }
   }
   render() {

@@ -1,5 +1,8 @@
 import React from "react";
 import Die from "./Die";
+import "./GameControls.css";
+import { GiRollingDices } from "react-icons/gi";
+import { MdFrontHand } from "react-icons/md";
 
 class GameControls extends React.Component {
   state = { die1Value: undefined, die2Value: undefined };
@@ -27,10 +30,12 @@ class GameControls extends React.Component {
       <>
         hi Im Game Controls
         <p>Current score is: {this.props.currentScore}</p>
-        <Die dieValue={this.state.die1Value} />
-        <Die dieValue={this.state.die2Value} />
+        <div className="diceContainer">
+          <Die dieValue={this.state.die1Value} />
+          <Die dieValue={this.state.die2Value} />
+        </div>
         <button id="roll" onClick={this.roll}>
-          Roll
+          Roll <GiRollingDices />
         </button>
         <button
           id="hold"
@@ -39,7 +44,7 @@ class GameControls extends React.Component {
             this.resetDice();
           }}
         >
-          Hold
+          Hold <MdFrontHand />
         </button>
       </>
     );
