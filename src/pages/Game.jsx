@@ -10,8 +10,10 @@ class Game extends React.Component {
     currentScore: 0,
     player0: { id: 0, score: 0, isActive: false },
     player1: { id: 1, score: 0, isActive: true },
-    pointsToWin: 100,
+    pointsToWin: 20,
     userMessage: "Ready to Roll?",
+    dice: [undefined, undefined],
+    isWinner: false,
   };
 
   awwSound = new Audio(sound);
@@ -27,17 +29,43 @@ class Game extends React.Component {
     return die1 === die2 ? false : true;
   }
 
+  updatePlayer = () => {
+    console.log("player wins");
+  };
+
   handleDiceResult = ({ die1, die2 }) => {
-    // Checks if legit roll, if then add to current round score.
+    // Checks if legit roll, if so - add to current round score.
     if (this.legitRoll({ die1, die2 })) {
+      // Update current score
+      const dieSum = die1 + die2;
       this.setState((prev) => {
-        return { currentScore: prev.currentScore + die1 + die2 };
+        return { currentScore: prev.currentScore + dieSum };
       });
+      // Check if active player wins
+      const activeP = this.getActivePlayer();
+      if (
+        activeP.score + this.state.currentScore + dieSum >
+        this.state.pointsToWin
+      ) {
+        // We have a winner!
+        const activePlayerCopy = Object.assign({}, activeP);
+        activePlayerCopy.score += this.state.currentScore + dieSum;
+        this.setState({
+          userMessage: `Player ${activeP.id} Wins!!`,
+          isWinner: true,
+          [`player${activeP.id}`]: activePlayerCopy,
+        });
+      }
     } else {
+      // Not a legit roll.
       this.awwSound.play();
-      this.setState({ currentScore: 0, userMessage: "AWWWWW" });
+      this.setState({
+        currentScore: 0,
+        userMessage: "AWWWWW",
+        dice: [undefined, undefined],
+        // TODO reset dice display! this doesnt work
+      });
       setTimeout(() => this.switchTurns(), 1000);
-      // TODO reset dice display!
     }
   };
 
@@ -49,11 +77,11 @@ class Game extends React.Component {
 
   hold = () => {
     // add current score to total player score, then reset current score
-    const active = this.getActivePlayer();
-    const activePlayerCopy = Object.assign({}, active);
+    const activeP = this.getActivePlayer();
+    const activePlayerCopy = Object.assign({}, activeP);
     activePlayerCopy.score += this.state.currentScore;
 
-    this.setState({ [`player${active.id}`]: activePlayerCopy });
+    this.setState({ [`player${activeP.id}`]: activePlayerCopy });
     this.setState({ currentScore: 0 });
     this.switchTurns();
   };
@@ -88,7 +116,8 @@ class Game extends React.Component {
             currentScore={this.state.currentScore}
             handleDiceResult={this.handleDiceResult}
             hold={this.hold}
-            dice={[undefined, undefined]}
+            dice={this.state.dice}
+            isWinner={this.state.isWinner}
           />
         </div>
       </div>

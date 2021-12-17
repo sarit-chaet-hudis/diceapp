@@ -7,7 +7,6 @@
 button {
   font-size: 20px;
   color: white;
-  color: #f3a697;
   font-weight: 300;
   padding: 7px 15px;
   border-radius: 20px;
@@ -24,6 +23,8 @@ button:hover {
 
 .userMessage {
   color: #f7e179;
+  color: aqua;
+  text-shadow: 5px 5px 5px rgb(34, 39, 70);
   font-weight: 400;
   letter-spacing: 1px;
 }

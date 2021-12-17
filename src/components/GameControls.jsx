@@ -9,6 +9,7 @@ class GameControls extends React.Component {
   state = { die1Value: this.props.dice[0], die2Value: this.props.dice[1] };
   diceSound = new Audio(sound);
   roll = () => {
+    this.diceSound.currentTime = 0;
     this.diceSound.play();
     const die1 = Math.ceil(Math.random() * 6);
     const die2 = Math.ceil(Math.random() * 6);
@@ -26,6 +27,37 @@ class GameControls extends React.Component {
     this.setState(() => {
       return { die1Value: undefined, die2Value: undefined };
     });
+  }
+
+  renderButtons() {
+    if (!this.props.isWinner) {
+      // Render enabled buttons
+      return (
+        <>
+          <button id="roll" onClick={this.roll}>
+            Roll <GiRollingDices />
+          </button>
+          <button
+            id="hold"
+            onClick={() => {
+              this.props.hold();
+              this.resetDice();
+            }}
+          >
+            Hold <MdFrontHand />
+          </button>
+        </>
+      );
+    } else {
+      <>
+        <button id="roll" disabled>
+          Roll <GiRollingDices />
+        </button>
+        <button id="hold" disabled>
+          Hold <MdFrontHand />
+        </button>
+      </>;
+    }
   }
 
   render() {
