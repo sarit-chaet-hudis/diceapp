@@ -5,6 +5,7 @@
 }
 
 button {
+  cursor: pointer;
   font-size: 20px;
   color: white;
   font-weight: 300;
@@ -13,19 +14,17 @@ button {
   border: none;
   margin: 5px;
   background: rgba(76, 88, 141, 1);
-
-  font-family: "Josefin Sans", sans-serif;
 }
 
 button:hover {
   filter: brightness(110%);
 }
 button:hover:disabled {
+  cursor: unset;
   filter: brightness(100%);
 }
 
 .userMessage {
-  color: #f7e179;
   color: aqua;
   text-shadow: 5px 5px 5px rgb(34, 39, 70);
   font-weight: 400;

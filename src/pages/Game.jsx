@@ -87,10 +87,27 @@ class Game extends React.Component {
     this.switchTurns();
   };
 
+  newGame() {
+    // Init game
+    console.log("starting new game..");
+    this.setState({
+      currentScore: 0,
+      player0: { id: 0, score: 0, isActive: false },
+      player1: { id: 1, score: 0, isActive: true },
+      pointsToWin: 20,
+      userMessage: "Ready to Roll?",
+      dice: [undefined, undefined],
+      isWinner: false,
+    });
+  }
+
   render() {
     return (
       <div>
         <h1>Welcome to Dice Game!</h1>
+        <button id="newGame" onClick={() => this.newGame()}>
+          New Game
+        </button>
         <div className="playerWrapper">
           <div className="playerContainer">
             <Player
