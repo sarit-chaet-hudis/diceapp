@@ -58,6 +58,7 @@ class Game extends React.Component {
       }
     } else {
       // Not a legit roll.
+      this.awwSound.currentTime = 0;
       this.awwSound.play();
       this.setState({
         currentScore: 0,

@@ -49,14 +49,16 @@ class GameControls extends React.Component {
         </>
       );
     } else {
-      <>
-        <button id="roll" disabled>
-          Roll <GiRollingDices />
-        </button>
-        <button id="hold" disabled>
-          Hold <MdFrontHand />
-        </button>
-      </>;
+      return (
+        <>
+          <button id="roll" disabled>
+            Roll <GiRollingDices />
+          </button>
+          <button id="hold" disabled>
+            Hold <MdFrontHand />
+          </button>
+        </>
+      );
     }
   }
 
@@ -69,18 +71,7 @@ class GameControls extends React.Component {
           <Die dieValue={this.state.die2Value} />
         </div>
         <h3>Current score is: {this.props.currentScore}</h3>
-        <button id="roll" onClick={this.roll}>
-          Roll <GiRollingDices />
-        </button>
-        <button
-          id="hold"
-          onClick={() => {
-            this.props.hold();
-            this.resetDice();
-          }}
-        >
-          Hold <MdFrontHand />
-        </button>
+        {this.renderButtons()}
       </>
     );
   }
