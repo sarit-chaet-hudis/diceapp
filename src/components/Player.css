@@ -5,3 +5,10 @@
 .hide {
   display: none;
 }
+
+.avatar {
+  font-size: 72px;
+  line-height: 80px;
+  color: pink;
+  margin: 0;
+}

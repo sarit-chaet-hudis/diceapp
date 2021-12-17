@@ -28,12 +28,12 @@ class GameControls extends React.Component {
   render() {
     return (
       <>
-        hi Im Game Controls
-        <p>Current score is: {this.props.currentScore}</p>
+        <h2 className="message">Ready to roll?</h2>
         <div className="diceContainer">
           <Die dieValue={this.state.die1Value} />
           <Die dieValue={this.state.die2Value} />
         </div>
+        <p>Current score is: {this.props.currentScore}</p>
         <button id="roll" onClick={this.roll}>
           Roll <GiRollingDices />
         </button>

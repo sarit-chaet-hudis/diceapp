@@ -2,6 +2,7 @@ import React from "react";
 import "./Game.css";
 import GameControls from "../components/GameControls";
 import Player from "../components/Player";
+import { GiBatMask, GiAlienStare } from "react-icons/gi";
 
 class Game extends React.Component {
   state = {
@@ -44,18 +45,25 @@ class Game extends React.Component {
     return (
       <div>
         <h1>Welcome to Dice Game!</h1>
-
-        <div className="playerContainer">
-          <Player
-            id={this.state.player0.id}
-            score={this.state.player0.score}
-            isActive={this.state.player0.isActive}
-          />
-          <Player
-            id={this.state.player1.id}
-            score={this.state.player1.score}
-            isActive={this.state.player1.isActive}
-          />
+        <div className="playerWrapper">
+          <div className="playerContainer">
+            <Player
+              id={this.state.player0.id}
+              score={this.state.player0.score}
+              isActive={this.state.player0.isActive}
+            >
+              <GiBatMask />
+            </Player>
+          </div>
+          <div className="playerContainer">
+            <Player
+              id={this.state.player1.id}
+              score={this.state.player1.score}
+              isActive={this.state.player1.isActive}
+            >
+              <GiAlienStare />
+            </Player>
+          </div>
         </div>
         <div className="gameControls">
           <GameControls
