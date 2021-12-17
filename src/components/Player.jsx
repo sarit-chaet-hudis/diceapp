@@ -6,9 +6,14 @@ class Player extends React.Component {
     return (
       <div className={this.props.isActive ? "active" : undefined}>
         <p className="avatar">{this.props.children}</p>
-        <p>Im Player {this.props.id}</p>
-        <p className={this.props.isActive ? undefined : "hide"}>My turn!</p>
+        <h3>Player {this.props.id}</h3>
         <p>My Score is {this.props.score}</p>
+        <p
+          className={this.props.isActive ? undefined : "hide"}
+          style={{ color: "red" }}
+        >
+          My turn!
+        </p>
       </div>
     );
   }

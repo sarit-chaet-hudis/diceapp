@@ -7,6 +7,7 @@
 button {
   font-size: 20px;
   color: white;
+  color: #f3a697;
   font-weight: 300;
   padding: 7px 15px;
   border-radius: 20px;
@@ -19,4 +20,10 @@ button {
 
 button:hover {
   filter: brightness(110%);
+}
+
+.userMessage {
+  color: #f7e179;
+  font-weight: 400;
+  letter-spacing: 1px;
 }

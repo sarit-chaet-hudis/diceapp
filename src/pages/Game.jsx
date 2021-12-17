@@ -10,18 +10,31 @@ class Game extends React.Component {
     player0: { id: 0, score: 0, isActive: false },
     player1: { id: 1, score: 0, isActive: true },
     pointsToWin: 100,
+    userMessage: "Ready to Roll?",
   };
 
   switchTurns = () => {
     //TODO find out if this syntax is doing what i thought and why no : is involved
     this.setState((prev) => (prev.player0.isActive = !prev.player0.isActive));
     this.setState((prev) => (prev.player1.isActive = !prev.player1.isActive));
+    setTimeout(() => this.setState({ userMessage: "Ready to Roll?" }), 1000);
   };
 
-  addDiceResult = (result) => {
-    this.setState((prev) => {
-      return { currentScore: prev.currentScore + result };
-    });
+  legitRoll({ die1, die2 }) {
+    // checks if roll is legit, i.e. dice are different value
+    return die1 === die2 ? false : true;
+  }
+
+  handleDiceResult = ({ die1, die2 }) => {
+    // Checks if legit roll, if then add to current round score.
+    if (this.legitRoll({ die1, die2 })) {
+      this.setState((prev) => {
+        return { currentScore: prev.currentScore + die1 + die2 };
+      });
+    } else {
+      this.setState({ currentScore: 0, userMessage: "AWWWWW" });
+      setTimeout(() => this.switchTurns(), 1000);
+    }
   };
 
   getActivePlayer() {
@@ -67,9 +80,11 @@ class Game extends React.Component {
         </div>
         <div className="gameControls">
           <GameControls
+            userMessage={this.state.userMessage}
             currentScore={this.state.currentScore}
-            addDiceResult={this.addDiceResult}
+            handleDiceResult={this.handleDiceResult}
             hold={this.hold}
+            dice={[undefined, undefined]}
           />
         </div>
       </div>

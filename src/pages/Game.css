@@ -10,6 +10,10 @@ body {
   text-align: center;
 }
 
+p {
+  font-weight: 300;
+}
+
 .playerContainer,
 .gameControls {
   margin: 0 30px;
