@@ -6,7 +6,10 @@ import { MdFrontHand } from "react-icons/md";
 import sound from "./../assets/sounds/dice-sound.mp3";
 
 class GameControls extends React.Component {
-  state = { die1Value: this.props.dice[0], die2Value: this.props.dice[1] };
+  constructor(props) {
+    super(props);
+    this.state = { die1Value: undefined, die2Value: undefined };
+  }
   diceSound = new Audio(sound);
   roll = () => {
     this.diceSound.currentTime = 0;
@@ -14,6 +17,9 @@ class GameControls extends React.Component {
     const die1 = Math.ceil(Math.random() * 6);
     const die2 = Math.ceil(Math.random() * 6);
     this.showDice({ die1, die2 });
+    if (die1 === die2) {
+      setTimeout(() => this.resetDice(), 1000);
+    }
     this.props.handleDiceResult({ die1, die2 });
   };
 
@@ -24,13 +30,14 @@ class GameControls extends React.Component {
   }
 
   resetDice() {
-    this.setState(() => {
-      return { die1Value: undefined, die2Value: undefined };
+    this.setState({
+      die1Value: undefined,
+      die2Value: undefined,
     });
   }
 
   renderButtons() {
-    if (!this.props.isWinner) {
+    if (!this.props.isButtonsDisabled) {
       // Render enabled buttons
       return (
         <>

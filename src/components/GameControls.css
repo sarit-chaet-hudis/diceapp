@@ -14,6 +14,7 @@ button {
   border: none;
   margin: 5px;
   background: rgba(76, 88, 141, 1);
+  min-width: 110px;
 }
 
 button:hover {
@@ -25,7 +26,7 @@ button:hover:disabled {
 }
 
 .userMessage {
-  color: #5ed9ff;
+  color: #8fe5ff;
   text-shadow: 5px 5px 5px rgb(34, 39, 70);
   font-weight: 400;
   letter-spacing: 1px;

@@ -12,8 +12,8 @@ class Game extends React.Component {
     player1: { id: 1, score: 0, isActive: true },
     pointsToWin: 20,
     userMessage: "Ready to Roll?",
-    dice: [undefined, undefined],
-    isWinner: false,
+    displayDice: false,
+    isButtonsDisabled: false,
   };
 
   awwSound = new Audio(sound);
@@ -21,7 +21,6 @@ class Game extends React.Component {
     //TODO find out if this syntax is doing what i thought and why no : is involved
     this.setState((prev) => (prev.player0.isActive = !prev.player0.isActive));
     this.setState((prev) => (prev.player1.isActive = !prev.player1.isActive));
-    setTimeout(() => this.setState({ userMessage: "Ready to Roll?" }), 1000);
   };
 
   legitRoll({ die1, die2 }) {
@@ -32,6 +31,10 @@ class Game extends React.Component {
   updatePlayer = () => {
     console.log("player wins");
   };
+
+  // toggleDisplayDice = () => {
+  //   this.setState({ resetDice: false });
+  // };
 
   handleDiceResult = ({ die1, die2 }) => {
     // Checks if legit roll, if so - add to current round score.
@@ -52,21 +55,30 @@ class Game extends React.Component {
         activePlayerCopy.score += this.state.currentScore + dieSum;
         this.setState({
           userMessage: `Player ${activeP.id + 1} Wins!!`,
-          isWinner: true,
+          isButtonsDisabled: true,
           [`player${activeP.id}`]: activePlayerCopy,
         });
       }
     } else {
-      // Not a legit roll.
+      // Not a legit roll. Reset current score and switch turns.
       this.awwSound.currentTime = 0;
       this.awwSound.play();
       this.setState({
         currentScore: 0,
         userMessage: "AWWWWW",
-        dice: [undefined, undefined],
-        // TODO reset dice display! this doesnt work
+        isButtonsDisabled: true,
+        ResetDice: true,
       });
       setTimeout(() => this.switchTurns(), 1000);
+      setTimeout(
+        () =>
+          this.setState({
+            isButtonsDisabled: false,
+            userMessage: "Ready to Roll?",
+            ResetDice: false,
+          }),
+        1000
+      );
     }
   };
 
@@ -89,20 +101,16 @@ class Game extends React.Component {
 
   newGame() {
     // Init game
-    console.log("starting new game..");
     this.setState({
       currentScore: 0,
       player0: { id: 0, score: 0, isActive: false },
       player1: { id: 1, score: 0, isActive: true },
-      pointsToWin: 20,
       userMessage: "Ready to Roll?",
-      dice: [undefined, undefined],
-      isWinner: false,
+      isButtonsDisabled: false,
     });
   }
 
   changePointsToWin(e) {
-    console.log(e.target.value);
     this.setState({ pointsToWin: e.target.value });
   }
 
@@ -156,8 +164,8 @@ class Game extends React.Component {
             currentScore={this.state.currentScore}
             handleDiceResult={this.handleDiceResult}
             hold={this.hold}
-            dice={this.state.dice}
-            isWinner={this.state.isWinner}
+            displayDice={this.state.displayDice}
+            isButtonsDisabled={this.state.isButtonsDisabled}
           />
         </div>
       </div>
