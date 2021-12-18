@@ -2,9 +2,18 @@
   display: none;
 }
 
-.avatar {
-  font-size: 72px;
-  line-height: 80px;
-  color: pink;
-  margin: 0;
+/* .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 30px;
+  margin: 0 auto;
+  padding: 0;
+} */
+
+img.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 30px;
+  margin: 0 auto;
+  padding: 0;
 }

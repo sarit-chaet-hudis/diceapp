@@ -8,6 +8,7 @@ body {
     rgba(29, 36, 66, 1) 0%,
     rgba(81, 92, 139, 1) 100%
   );
+  background-attachment: fixed;
   color: white;
   height: 100%;
   font-family: "Josefin Sans", sans-serif;

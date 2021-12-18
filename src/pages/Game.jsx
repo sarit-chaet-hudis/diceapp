@@ -2,8 +2,10 @@ import React from "react";
 import "./Game.css";
 import GameControls from "../components/GameControls";
 import Player from "../components/Player";
-import { GiBatMask, GiAlienStare } from "react-icons/gi";
-import sound from "./../assets/sounds/aww.wav";
+import cat from "../assets/images/cat.jfif";
+import tree from "../assets/images/wishing-tree.JPG";
+import awwSound from "./../assets/sounds/aww.wav";
+import victorySound from "./../assets/sounds/Victory.mp3";
 
 class Game extends React.Component {
   state = {
@@ -17,7 +19,8 @@ class Game extends React.Component {
     isButtonsDisabled: false,
   };
 
-  awwSound = new Audio(sound);
+  awwSound = new Audio(awwSound);
+  victorySound = new Audio(victorySound);
   switchTurns = () => {
     //TODO find out if this syntax is doing what i thought and why no : is involved
     this.setState((prev) => (prev.player0.isActive = !prev.player0.isActive));
@@ -28,10 +31,6 @@ class Game extends React.Component {
     // checks if roll is legit, i.e. dice are different value
     return die1 === die2 ? false : true;
   }
-
-  updatePlayer = () => {
-    console.log("player wins");
-  };
 
   handleDiceResult = ({ die1, die2 }) => {
     this.setState({ die1Value: die1, die2Value: die2 });
@@ -50,10 +49,13 @@ class Game extends React.Component {
         this.state.pointsToWin
       ) {
         // We have a winner!
+        this.victorySound.play();
         const activePlayerCopy = Object.assign({}, activeP);
         activePlayerCopy.score += this.state.currentScore + dieSum;
         this.setState({
-          userMessage: `Player ${activeP.id + 1} Wins!!`,
+          userMessage: `Player ${
+            activeP.id + 1
+          } Wins!!  New Game button is up there`,
           isButtonsDisabled: true,
           [`player${activeP.id}`]: activePlayerCopy,
         });
@@ -150,7 +152,7 @@ class Game extends React.Component {
             }
           >
             <Player id={this.state.player0.id} score={this.state.player0.score}>
-              <GiBatMask />
+              <img src={tree} alt="tree" className="avatar" />
             </Player>
           </div>
           <div
@@ -161,7 +163,7 @@ class Game extends React.Component {
             }
           >
             <Player id={this.state.player1.id} score={this.state.player1.score}>
-              <GiAlienStare />
+              <img src={cat} alt="cat" className="avatar" />
             </Player>
           </div>
         </div>
