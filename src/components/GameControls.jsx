@@ -6,35 +6,14 @@ import { MdFrontHand } from "react-icons/md";
 import sound from "./../assets/sounds/dice-sound.mp3";
 
 class GameControls extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { die1Value: undefined, die2Value: undefined };
-  }
   diceSound = new Audio(sound);
   roll = () => {
     this.diceSound.currentTime = 0;
     this.diceSound.play();
     const die1 = Math.ceil(Math.random() * 6);
     const die2 = Math.ceil(Math.random() * 6);
-    this.showDice({ die1, die2 });
-    if (die1 === die2) {
-      setTimeout(() => this.resetDice(), 1000);
-    }
     this.props.handleDiceResult({ die1, die2 });
   };
-
-  showDice({ die1, die2 }) {
-    this.setState(() => {
-      return { die1Value: die1, die2Value: die2 };
-    });
-  }
-
-  resetDice() {
-    this.setState({
-      die1Value: undefined,
-      die2Value: undefined,
-    });
-  }
 
   renderButtons() {
     if (!this.props.isButtonsDisabled) {
@@ -48,7 +27,6 @@ class GameControls extends React.Component {
             id="hold"
             onClick={() => {
               this.props.hold();
-              this.resetDice();
             }}
           >
             Hold <MdFrontHand />
@@ -74,8 +52,8 @@ class GameControls extends React.Component {
       <>
         <h3 className="userMessage">{this.props.userMessage}</h3>
         <div className="diceContainer">
-          <Die dieValue={this.state.die1Value} />
-          <Die dieValue={this.state.die2Value} />
+          <Die dieValue={this.props.die1Value} />
+          <Die dieValue={this.props.die2Value} />
         </div>
         <h3>Current score is: {this.props.currentScore}</h3>
         {this.renderButtons()}

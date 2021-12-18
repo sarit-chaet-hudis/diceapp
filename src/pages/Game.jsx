@@ -12,7 +12,8 @@ class Game extends React.Component {
     player1: { id: 1, score: 0, isActive: true },
     pointsToWin: 20,
     userMessage: "Ready to Roll?",
-    displayDice: false,
+    die1Value: undefined,
+    die2Value: undefined,
     isButtonsDisabled: false,
   };
 
@@ -32,12 +33,10 @@ class Game extends React.Component {
     console.log("player wins");
   };
 
-  // toggleDisplayDice = () => {
-  //   this.setState({ resetDice: false });
-  // };
-
   handleDiceResult = ({ die1, die2 }) => {
+    this.setState({ die1Value: die1, die2Value: die2 });
     // Checks if legit roll, if so - add to current round score.
+
     if (this.legitRoll({ die1, die2 })) {
       // Update current score
       const dieSum = die1 + die2;
@@ -64,18 +63,20 @@ class Game extends React.Component {
       this.awwSound.currentTime = 0;
       this.awwSound.play();
       this.setState({
+        // Immediately (asap..)
         currentScore: 0,
         userMessage: "AWWWWW",
         isButtonsDisabled: true,
-        ResetDice: true,
       });
       setTimeout(() => this.switchTurns(), 1000);
       setTimeout(
         () =>
           this.setState({
+            // After 1 second
             isButtonsDisabled: false,
             userMessage: "Ready to Roll?",
-            ResetDice: false,
+            die1Value: undefined,
+            die2Value: undefined,
           }),
         1000
       );
@@ -95,7 +96,11 @@ class Game extends React.Component {
     activePlayerCopy.score += this.state.currentScore;
 
     this.setState({ [`player${activeP.id}`]: activePlayerCopy });
-    this.setState({ currentScore: 0 });
+    this.setState({
+      currentScore: 0,
+      die1Value: undefined,
+      die2Value: undefined,
+    });
     this.switchTurns();
   };
 
@@ -107,6 +112,8 @@ class Game extends React.Component {
       player1: { id: 1, score: 0, isActive: true },
       userMessage: "Ready to Roll?",
       isButtonsDisabled: false,
+      die1Value: undefined,
+      die2Value: undefined,
     });
   }
 
@@ -166,6 +173,8 @@ class Game extends React.Component {
             hold={this.hold}
             displayDice={this.state.displayDice}
             isButtonsDisabled={this.state.isButtonsDisabled}
+            die1Value={this.state.die1Value}
+            die2Value={this.state.die2Value}
           />
         </div>
       </div>
