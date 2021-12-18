@@ -4,16 +4,10 @@ import "./Player.css";
 class Player extends React.Component {
   render() {
     return (
-      <div className={this.props.isActive ? "active" : undefined}>
+      <div>
         <p className="avatar">{this.props.children}</p>
-        <h3>Player {this.props.id}</h3>
+        <h3>Player {this.props.id + 1}</h3>
         <p>My Score is {this.props.score}</p>
-        <p
-          className={this.props.isActive ? undefined : "hide"}
-          style={{ color: "red" }}
-        >
-          My turn!
-        </p>
       </div>
     );
   }

@@ -51,7 +51,7 @@ class Game extends React.Component {
         const activePlayerCopy = Object.assign({}, activeP);
         activePlayerCopy.score += this.state.currentScore + dieSum;
         this.setState({
-          userMessage: `Player ${activeP.id} Wins!!`,
+          userMessage: `Player ${activeP.id + 1} Wins!!`,
           isWinner: true,
           [`player${activeP.id}`]: activePlayerCopy,
         });
@@ -124,24 +124,28 @@ class Game extends React.Component {
             onChange={(e) => this.changePointsToWin(e)}
           ></input>
         </div>
-        <h1>Welcome to Dice Game!</h1>
+        <h1 className="top">Welcome to Dice Game!</h1>
 
         <div className="playerWrapper">
-          <div className="playerContainer">
-            <Player
-              id={this.state.player0.id}
-              score={this.state.player0.score}
-              isActive={this.state.player0.isActive}
-            >
+          <div
+            className={
+              this.state.player0.isActive
+                ? "active playerContainer"
+                : "playerContainer"
+            }
+          >
+            <Player id={this.state.player0.id} score={this.state.player0.score}>
               <GiBatMask />
             </Player>
           </div>
-          <div className="playerContainer">
-            <Player
-              id={this.state.player1.id}
-              score={this.state.player1.score}
-              isActive={this.state.player1.isActive}
-            >
+          <div
+            className={
+              this.state.player1.isActive
+                ? "active playerContainer"
+                : "playerContainer"
+            }
+          >
+            <Player id={this.state.player1.id} score={this.state.player1.score}>
               <GiAlienStare />
             </Player>
           </div>

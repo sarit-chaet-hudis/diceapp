@@ -50,9 +50,8 @@ p {
 }
 
 .playerContainer {
-  /* margin: 0 30px; */
-  max-width: calc(50% - 45px);
-  min-width: calc(50% - 45px);
+  max-width: calc(50% - 55px);
+  min-width: calc(50% - 55px);
 }
 
 #newGame {
@@ -75,7 +74,7 @@ p {
   top: 10px;
   right: 150px;
   border-radius: 20px;
-  width: 45px;
+  width: 55px;
   text-align: center;
   border: none;
   padding: 9px 5px 4px;
@@ -94,4 +93,28 @@ input[type="number"] {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+@media screen and (max-width: 1250px) {
+  .top {
+    margin-top: 70px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .playerContainer {
+    min-width: calc(50% - 20px);
+  }
+
+  .gameControls {
+    width: calc(100% - 20px);
+  }
+}
+
+.active {
+  background: rgb(83, 111, 235);
+  background: linear-gradient(
+    351deg,
+    rgba(83, 111, 235, 1) 35%,
+    rgba(115, 208, 253, 1) 100%
+  );
 }
