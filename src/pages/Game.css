@@ -18,6 +18,13 @@ body {
 
 p {
   font-weight: 300;
+  margin-block-start: 0;
+  margin-block-end: 15px;
+}
+
+h3 {
+  margin-block-start: 0;
+  margin-block-end: 15px;
 }
 
 .playerContainer,

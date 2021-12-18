@@ -10,9 +10,9 @@ import victorySound from "./../assets/sounds/Victory.mp3";
 class Game extends React.Component {
   state = {
     currentScore: 0,
-    player0: { id: 0, score: 0, isActive: false },
-    player1: { id: 1, score: 0, isActive: true },
-    pointsToWin: 20,
+    player0: { id: 0, score: 0, isActive: true },
+    player1: { id: 1, score: 0, isActive: false },
+    pointsToWin: 40,
     userMessage: "Ready to Roll?",
     die1Value: undefined,
     die2Value: undefined,
@@ -70,35 +70,35 @@ class Game extends React.Component {
         userMessage: "AWWWWW",
         isButtonsDisabled: true,
       });
-      setTimeout(() => this.switchTurns(), 1000);
-      setTimeout(
-        () =>
-          this.setState({
-            // After 1 second
-            isButtonsDisabled: false,
-            userMessage: "Ready to Roll?",
-            die1Value: undefined,
-            die2Value: undefined,
-          }),
-        1000
-      );
+      setTimeout(() => {
+        // After 1 second
+        this.switchTurns();
+        this.setState({
+          isButtonsDisabled: false,
+          userMessage: "Ready to Roll?",
+          die1Value: undefined,
+          die2Value: undefined,
+        });
+      }, 1000);
     }
   };
 
   getActivePlayer() {
+    // returns active player state object
     const playerArray = [this.state.player0, this.state.player1];
     const activePlayer = playerArray.find((p) => p.isActive);
     return activePlayer;
   }
 
   hold = () => {
-    // add current score to total player score, then reset current score
+    // Add current score to total player score, then reset current score
     const activeP = this.getActivePlayer();
     const activePlayerCopy = Object.assign({}, activeP);
     activePlayerCopy.score += this.state.currentScore;
-
-    this.setState({ [`player${activeP.id}`]: activePlayerCopy });
+    // Replace active player state object with an updated version.
+    // This is because you can't directly set state of property inside state object.
     this.setState({
+      [`player${activeP.id}`]: activePlayerCopy,
       currentScore: 0,
       die1Value: undefined,
       die2Value: undefined,
@@ -110,8 +110,8 @@ class Game extends React.Component {
     // Init game
     this.setState({
       currentScore: 0,
-      player0: { id: 0, score: 0, isActive: false },
-      player1: { id: 1, score: 0, isActive: true },
+      player0: { id: 0, score: 0, isActive: true },
+      player1: { id: 1, score: 0, isActive: false },
       userMessage: "Ready to Roll?",
       isButtonsDisabled: false,
       die1Value: undefined,
@@ -120,6 +120,7 @@ class Game extends React.Component {
   }
 
   changePointsToWin(e) {
+    // Update state according to user input value
     this.setState({ pointsToWin: e.target.value });
   }
 

@@ -34,6 +34,7 @@ class GameControls extends React.Component {
         </>
       );
     } else {
+      // Render disabled buttons
       return (
         <>
           <button id="roll" disabled>
