@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: linear-gradient(
     0deg,
@@ -5,7 +9,7 @@ body {
     rgba(81, 92, 139, 1) 100%
   );
   color: white;
-  height: 100vh;
+  height: 100%;
   font-family: "Josefin Sans", sans-serif;
   text-align: center;
   font-size: 20px;
@@ -17,8 +21,7 @@ p {
 
 .playerContainer,
 .gameControls {
-  max-width: 500px;
-  margin: 0 30px;
+  /* max-width: 500px; */
   padding: 15px;
   background: rgb(76, 88, 141);
   background: linear-gradient(
@@ -37,16 +40,19 @@ p {
 }
 
 .gameControls {
+  margin: 0 30px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   margin: 30px auto;
-  max-width: 500px;
+  width: calc(100% - 60px);
 }
 
 .playerContainer {
-  width: 40vw;
+  /* margin: 0 30px; */
+  max-width: calc(50% - 45px);
+  min-width: calc(50% - 45px);
 }
 
 #newGame {
@@ -79,4 +85,13 @@ p {
   position: absolute;
   top: 20px;
   right: 220px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }

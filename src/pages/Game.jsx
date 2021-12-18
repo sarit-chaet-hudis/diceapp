@@ -109,20 +109,23 @@ class Game extends React.Component {
   render() {
     return (
       <div>
+        <div className="topMenu">
+          <button id="newGame" onClick={() => this.newGame()}>
+            New Game
+          </button>
+          <label htmlFor="pointsToWin" id="pointsLabel">
+            Points to Win:
+          </label>
+          <input
+            type="number"
+            id="pointsToWin"
+            placeholder="?"
+            value={this.state.pointsToWin}
+            onChange={(e) => this.changePointsToWin(e)}
+          ></input>
+        </div>
         <h1>Welcome to Dice Game!</h1>
-        <button id="newGame" onClick={() => this.newGame()}>
-          New Game
-        </button>
-        <label htmlFor="pointsToWin" id="pointsLabel">
-          Points to Win:
-        </label>
-        <input
-          type="text"
-          id="pointsToWin"
-          placeholder="?"
-          value={this.state.pointsToWin}
-          onChange={(e) => this.changePointsToWin(e)}
-        ></input>
+
         <div className="playerWrapper">
           <div className="playerContainer">
             <Player
