@@ -1,7 +1,7 @@
 # A two-player hot-seat dice game
 
 Players choose how many times to roll the dice and whoever gets faster to the target score- wins!
-The catch is, if you roll 6-6 or any other double, you lose all the points of the current round.
+The catch is, if you roll 6-6 or any other double, you lose all the points of the current round, and lose your turn.
 
 responsive and tested for desktop and mobile.
 
@@ -17,6 +17,16 @@ _GameControls_ holds the game buttons and dice rolling logic, all ascend to be h
 Player display is handled in the _Player_ components (child of Game).
 
 Dice display is handled in the _Die_ components (child of GameControls).
+
+## Known Issues and Backlog
+
+- add photos to ReadMe!!
+- netlify link to the about section in repo
+- cannot accept number smaller than 20 to PointsToWin
+- Option to change player's names (and avatars)
+  Code Cleaning:
+- set initial state as outside file and import on init game
+- create all buttons and input field as components
 
 created by sarit chaet hudis over a cold rainy weekend. enjoy!
 

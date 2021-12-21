@@ -142,7 +142,7 @@ class Game extends React.Component {
             onChange={(e) => this.changePointsToWin(e)}
           ></input>
         </div>
-        <h1 className="top">Welcome to Dice Game!</h1>
+        <h1 className="top">Dice Risk Game!</h1>
 
         <div className="playerWrapper">
           <div
