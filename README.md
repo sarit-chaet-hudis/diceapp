@@ -24,8 +24,6 @@ Dice display is handled in the _Die_ components (child of GameControls).
 
 ## Known Issues and Backlog
 
-- add photos to ReadMe!!
-- netlify link to the about section in repo
 - cannot accept number smaller than 20 to PointsToWin
 - Option to change player's names (and avatars)
   Code Cleaning:
